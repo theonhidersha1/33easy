@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validation</title>
+    <style>
+        .error {
+            color: red;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="nameForm">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name">
+        <span id="error" class="error"></span>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const nameInput = document.getElementById("name");
+        const errorMessage = document.getElementById("error");
+        const form = document.getElementById("nameForm");
+
+        nameInput.addEventListener("input", function () {
+            const name = nameInput.value;
+
+            if (/^[a-zA-Z ]*$/.test(name)) {
+                errorMessage.textContent = "";
+            } else {
+                errorMessage.textContent =
+                    "Please enter letters only!";
+            }
+        });
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (
+                nameInput.value.trim() !== "" &&
+                /^[a-zA-Z ]+$/.test(nameInput.value)
+            ) {
+                alert("Name is valid!");
+            } else {
+                errorMessage.textContent =
+                    "Please enter a valid name using letters only!";
+            }
+        });
+    </script>
+
+</body>
+</html>
